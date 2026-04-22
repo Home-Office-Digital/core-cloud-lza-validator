@@ -1,0 +1,29 @@
+
+---
+version: 2
+updates:
+    # Enable Github Action updates
+    - package-ecosystem: "github-actions"
+      directory: "/"
+      schedule:
+          interval: "daily"
+      commit-message:
+          prefix: "chore(GHA)"
+      labels:
+          - "dependencies"
+          - "patch"
+          - "actions"
+    
+
+    # Enable docker dependencies updates for Dockerfiles
+    - package-ecosystem: "docker"
+      directory: "/"
+      schedule:
+          interval: "daily"
+      commit-message:
+          prefix: "chore(Docker)"
+      labels:
+          - "dependencies"
+          - "patch"
+          - "docker"
+        
