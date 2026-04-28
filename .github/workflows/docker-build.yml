@@ -33,4 +33,4 @@ jobs:
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
     - name: Publish Docker Image
-      run: docker push -a ghcr.io/Home-Office-Digital/cc-lza-validator
+      run: docker push -a ghcr.io/home-office-digital/cc-lza-validator
