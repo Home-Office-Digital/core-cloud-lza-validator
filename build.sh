@@ -13,7 +13,7 @@ git -c advice.detachedHead=false checkout $release
 cd ..
 echo $release
 image_name=cc-lza-validator
-image_id=ghcr.io/UKHomeOffice/$image_name
+image_id=ghcr.io/Home-Office-Digital/$image_name
 image_id=$(echo $image_id | tr '[A-Z]' '[a-z]')
 
 docker build --platform linux/amd64 --tag $image_id:$release .

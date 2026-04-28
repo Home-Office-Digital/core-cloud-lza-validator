@@ -3,7 +3,7 @@ kind: Component
 metadata:
   name: core-cloud-lza-validator
   annotations:
-    github.com/project-slug: UKHomeOffice/core-cloud-lza-validator
+    github.com/project-slug: Home-Office-Digital/core-cloud-lza-validator
 spec:
   type: service
   owner: core-cloud-devops
