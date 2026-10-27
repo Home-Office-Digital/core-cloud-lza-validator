@@ -1,0 +1,45 @@
+version: 2
+updates:
+    # Enable Github Action updates
+    - package-ecosystem: "github-actions"
+      directory: "/"
+      schedule:
+          interval: "daily"
+      commit-message:
+          prefix: "chore(GHA)"
+      labels:
+          - "dependencies"
+          - "patch"
+          - "actions"
+      groups:
+          # One group for everything, majors included, since an action
+          # major is usually just a runtime bump
+          github-actions-all:
+              patterns:
+                  - "*"
+              update-types:
+                  - "minor"
+                  - "patch"
+                  - "major"
+
+    # Enable docker dependencies updates for Dockerfiles
+    - package-ecosystem: "docker"
+      directory: "/"
+      schedule:
+          interval: "daily"
+      commit-message:
+          prefix: "chore(Docker)"
+      labels:
+          - "dependencies"
+          - "patch"
+          - "docker"
+      groups:
+          docker-security:
+              applies-to: security-updates
+              patterns:
+                  - "*"
+          docker-minor-and-patch:
+              applies-to: version-updates
+              update-types:
+                  - "minor"
+                  - "patch"
