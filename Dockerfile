@@ -1,4 +1,4 @@
-FROM node:18-alpine3.20
+FROM node:24-alpine3.20
 WORKDIR /source
 COPY landing-zone-accelerator-on-aws/source .
 
