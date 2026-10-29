@@ -5,20 +5,14 @@ updates:
     schedule:
       interval: "monthly"
     commit-message:
-      prefix: "chore"
-    reviewers:
-      - "Home-Office-Digital/core-cloud-organisational-management"
+      prefix: "chore(GHA):"
     labels:
       - "dependencies"
-      - "patch"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "monthly"
     commit-message:
-      prefix: "chore"
-    reviewers:
-      - "Home-Office-Digital/core-cloud-organisational-management"
+      prefix: "chore(DKR):"
     labels:
       - "dependencies"
-      - "patch"
