@@ -8,6 +8,12 @@ on:
     - .github/workflows/docker-build.yml
     - build.sh
     - Dockerfile
+  workflow_dispatch:
+    inputs:
+      release:
+        description: landing-zone-accelerator-on-aws release tag to build (vX.Y.Z)
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -16,6 +22,8 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
   REPO_NAME: ${{ github.event.repository.name }}
+  # Release tag used for push-triggered builds. Override via workflow_dispatch input.
+  DEFAULT_RELEASE: v1.9.2
 
 jobs:
   build-and-publish:
@@ -29,8 +37,10 @@ jobs:
       uses: actions/checkout@v7
 
     - name: Run build script
+      env:
+        RELEASE: ${{ github.event.inputs.release || env.DEFAULT_RELEASE }}
       run: |
-        bash build.sh
+        bash build.sh "$RELEASE"
     
     - name: Login to ghcr
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
