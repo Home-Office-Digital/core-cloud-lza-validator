@@ -2,18 +2,25 @@
 
 set -e -u -o pipefail
 
-# First argument: the landing-zone-accelerator-on-aws release tag to build
-# against, in the form 'vX.Y.Z'.
-release="${1:-}"
+# The landing-zone-accelerator-on-aws release tag to build against is pinned in
+# the RELEASE file (form 'vX.Y.Z'). Changing the release is a source change, so
+# the build output depends only on the repository contents.
+release_file="$(dirname "$0")/RELEASE"
+
+if [ ! -f "$release_file" ]; then
+  echo "RELEASE file not found at '$release_file'." >&2
+  exit 1
+fi
+
+release="$(tr -d '[:space:]' < "$release_file")"
 
 if [ -z "$release" ]; then
-  echo "Usage: $0 vX.Y.Z" >&2
-  echo "A landing-zone-accelerator-on-aws release tag must be provided." >&2
+  echo "RELEASE file is empty. It must contain a release tag in the form vX.Y.Z." >&2
   exit 1
 fi
 
 if ! echo "$release" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$'; then
-  echo "Invalid release tag '$release'. Expected format: vX.Y.Z" >&2
+  echo "Invalid release tag '$release' in RELEASE file. Expected format: vX.Y.Z" >&2
   exit 1
 fi
 
